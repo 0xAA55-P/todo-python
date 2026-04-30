@@ -9,8 +9,8 @@ src/
   main.py - ponto inicial
   utils.py - utilitários, pra receber nome, id, status, etc...
   task_operations.py - manipular o banco de dados e as tarefas nele
-
-database/
+ 
+- Em database, o banco de dados principal está localizado.
   tarefas.db - onde as tarefas ficam armazemadas
 
 ## Requisitos:
