@@ -1,4 +1,13 @@
-from rich import print
+"""TO-DO App em Python
+
+Autor: Anna
+Github: https://github.com/0xAA55-P
+
+As tarefas são salvas em /database/tarefas.db
+
+"""
+
+from rich import bprint # "beautiful print"
 from utils import (
     ler_opcao,
     mostrar_menu,
@@ -23,11 +32,11 @@ def main():
             escolha = ler_opcao()
 
             if escolha not in OPCOES_PRINCIPAIS_VALIDAS:
-                print("\n[ERRO] Valor inválido/Fora do alcance.")
+                bprint("\n[ERRO] Valor inválido/Fora do alcance.")
                 continue
 
             if escolha == 0:
-                print("\n[SAÍDA] Adeus!")
+                bprint("\n[SAÍDA] Adeus!")
                 break
 
             match escolha:
@@ -41,10 +50,10 @@ def main():
                     listar_tarefas()
 
         except ValueError:
-            print("\n[ERRO] Valor inválido.")
+            bprint("\n[ERRO] Valor inválido.")
 
         except KeyboardInterrupt:
-            print("\n[SAÍDA] Adeus!")
+            bprint("\n[SAÍDA] Adeus!")
             break
 
 if __name__ == "__main__":

@@ -1,8 +1,17 @@
-from rich import print
+"""Task Handling
+
+Gerencia as operações com o banco de dados.
+Exemplos: Criar a tabela, adicionar uma tarefa...
+
+"""
+
+from rich import print as bprint
+
 from utils import (
     ler_nome,
     ler_status,
     ler_id,
+    ler_opcao,
     mostrar_menu
 )
 
@@ -40,7 +49,7 @@ def adicionar_tarefa():
 def remover_tarefa():
     listar_tarefas()
 
-    id = ler_id()
+    id_da_tarefa = ler_id()
 
     with sqlite3.connect(NOME_BANCO) as conexao:
         cursor = conexao.cursor()
@@ -48,7 +57,7 @@ def remover_tarefa():
         cursor.execute("""
             DELETE FROM tarefas
             WHERE id = ?
-        """, (id,))
+        """, (id_da_tarefa,))
 
 def atualizar_tarefa():
     listar_tarefas()
@@ -58,7 +67,7 @@ def atualizar_tarefa():
         escolha = ler_opcao()
 
         if escolha not in OPCOES_ALTERAR_VALIDAS:
-            print("\nValor inválido/Fora de alcance.")
+            bprint("\nValor inválido/Fora de alcance.")
             continue
         else:
             break
@@ -68,7 +77,7 @@ def atualizar_tarefa():
     match escolha:
         case 1:
             novo_nome = ler_nome()
-    
+
             with sqlite3.connect(NOME_BANCO) as conexao:
                 cursor = conexao.cursor()
 
@@ -89,11 +98,11 @@ def atualizar_tarefa():
                     SET status = ?
                     WHERE id = ?
                 """, (novo_status, id_para_atualizar))
-    
+
 def listar_tarefas():
     with sqlite3.connect(NOME_BANCO) as conexao:
         cursor = conexao.cursor()
 
         cursor.execute("SELECT * FROM tarefas")
         for line in cursor.fetchall():
-            print(f"ID: {line[0]} | Nome: {line[1]} | Status: {line[2]}")
+            bprint(f"ID: {line[0]} | Nome: {line[1]} | Status: {line[2]}")

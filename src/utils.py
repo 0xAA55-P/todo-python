@@ -1,5 +1,10 @@
-from rich import print
-import sqlite3
+"""Utilitários básicos
+
+Oferece funções de input para evitar tanto a repetição de código.
+
+"""
+
+from rich import print as bprint
 
 def ler_nome():
     # caso não digite nada, nome = "Sem nome"
@@ -14,11 +19,11 @@ def ler_id():
         try:
             return int(input("ID Da tarefa: "))
         except ValueError:
-            print("\nID Invalido.")
+            bprint("\nID Invalido.")
 
 def ler_opcao():
     return int(input("Digite o numero da opção: "))
-    
+
 # menu_a_exibir:
 # 1. Principal
 # 2. O que alterar na tarefa (nome, status)
@@ -39,8 +44,8 @@ def mostrar_menu(menu_a_exibir):
     match menu_a_exibir:
         case 1:
             for opcao in opcoes_principais:
-                print(opcao)
+                bprint(opcao)
 
         case 2:
             for opcao in opcoes_alterar:
-                print(opcao)        
+                bprint(opcao)
