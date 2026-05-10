@@ -7,7 +7,7 @@ As tarefas são salvas em /database/tarefas.db
 
 """
 
-from rich import bprint # "beautiful print"
+from rich import print as bprint # "beautiful print"
 from utils import (
     ler_opcao,
     mostrar_menu,
