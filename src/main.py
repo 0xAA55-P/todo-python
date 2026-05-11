@@ -7,7 +7,7 @@ As tarefas são salvas em /database/tarefas.db
 
 """
 
-from rich import print as bprint # "beautiful print"
+from rich import print as bprint  # "beautiful print"
 from utils import (
     ler_opcao,
     mostrar_menu,
@@ -18,10 +18,11 @@ from task_operations import (
     remover_tarefa,
     listar_tarefas,
     atualizar_tarefa,
-    criar_tabela
+    criar_tabela,
 )
 
 OPCOES_PRINCIPAIS_VALIDAS = {0, 1, 2, 3, 4}
+
 
 def main():
     criar_tabela()
@@ -55,6 +56,7 @@ def main():
         except KeyboardInterrupt:
             bprint("\n[SAÍDA] Adeus!")
             break
+
 
 if __name__ == "__main__":
     main()

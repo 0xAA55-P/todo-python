@@ -7,18 +7,13 @@ Exemplos: Criar a tabela, adicionar uma tarefa...
 
 from rich import print as bprint
 
-from utils import (
-    ler_nome,
-    ler_status,
-    ler_id,
-    ler_opcao,
-    mostrar_menu
-)
+from utils import ler_nome, ler_status, ler_id, ler_opcao, mostrar_menu
 
 import sqlite3
 
 NOME_BANCO = "../database/tarefas.db"
 OPCOES_ALTERAR_VALIDAS = {1, 2}
+
 
 def criar_tabela():
     with sqlite3.connect(NOME_BANCO) as conexao:
@@ -33,6 +28,7 @@ def criar_tabela():
             )
         """)
 
+
 # manipulação de tarefas
 def adicionar_tarefa():
     nome = ler_nome()
@@ -41,10 +37,14 @@ def adicionar_tarefa():
     with sqlite3.connect(NOME_BANCO) as conexao:
         cursor = conexao.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT OR IGNORE INTO tarefas (nome, status)
             VALUES(?, ?)
-        """, (nome, status))
+        """,
+            (nome, status),
+        )
+
 
 def remover_tarefa():
     listar_tarefas()
@@ -54,10 +54,14 @@ def remover_tarefa():
     with sqlite3.connect(NOME_BANCO) as conexao:
         cursor = conexao.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             DELETE FROM tarefas
             WHERE id = ?
-        """, (id_da_tarefa,))
+        """,
+            (id_da_tarefa,),
+        )
+
 
 def atualizar_tarefa():
     listar_tarefas()
@@ -81,11 +85,14 @@ def atualizar_tarefa():
             with sqlite3.connect(NOME_BANCO) as conexao:
                 cursor = conexao.cursor()
 
-                cursor.execute("""
+                cursor.execute(
+                    """
                     UPDATE tarefas
                     SET nome = ?
                     WHERE id = ?
-                """, (novo_nome, id_para_atualizar))
+                """,
+                    (novo_nome, id_para_atualizar),
+                )
 
         case 2:
             novo_status = ler_status()
@@ -93,11 +100,15 @@ def atualizar_tarefa():
             with sqlite3.connect(NOME_BANCO) as conexao:
                 cursor = conexao.cursor()
 
-                cursor.execute("""
+                cursor.execute(
+                    """
                     UPDATE tarefas
                     SET status = ?
                     WHERE id = ?
-                """, (novo_status, id_para_atualizar))
+                """,
+                    (novo_status, id_para_atualizar),
+                )
+
 
 def listar_tarefas():
     with sqlite3.connect(NOME_BANCO) as conexao:
